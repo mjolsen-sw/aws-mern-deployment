@@ -6,17 +6,19 @@ import compression from "compression"
 import ensureInitialData from "./import"
 import apiRouter from "./api"
 
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+
 const app = express();
 app.use(compression());
 app.use(express.json());
 app.use(cors({
     origin: [
-        "http://localhost:5173"
+        FRONTEND_URL
     ]
 }))
 app.use(express.urlencoded());
 
-const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 const mongoDbUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/trivia';
 console.log(mongoDbUri);
@@ -34,6 +36,6 @@ ensureInitialData();
 
 app.use("/api", apiRouter);
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is listening on port ${PORT}`);
 });
