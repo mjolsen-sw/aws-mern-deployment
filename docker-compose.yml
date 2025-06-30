@@ -1,0 +1,42 @@
+services:
+  backend-node:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - FRONTEND_URL=http://localhost:4173
+      - MONGODB_URI=mongodb://mongodb:27017/trivia
+      - PORT=3000
+    depends_on:
+      - mongodb
+    networks:
+      - mern-network
+  frontend-react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4173:4173"
+    environment:
+      - VITE_API_URL=http://localhost:3000/api
+      - DEV=true
+    depends_on:
+      - backend-node
+    networks:
+      - mern-network
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - mern-network
+networks:
+  mern-network:
+    driver: bridge
+volumes:
+  mongodb-data:
+    driver: local

@@ -1,8 +1,9 @@
 FROM node:20-alpine
 
-EXPOSE 5173
+EXPOSE 4173
 WORKDIR /frontend-node
 COPY package*.json ./
 RUN npm install
 COPY . .
-CMD ["npm", "start"]
+RUN npm run build
+CMD ["npm", "run", "preview", "--", "--host"]
