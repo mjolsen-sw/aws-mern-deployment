@@ -1,0 +1,11 @@
+#! /usr/bin/bash
+ABS_PATH=$(readlink -f "$0")
+BACKEND_PATH=$(dirname $ABS_PATH)
+BIN_PATH=$(dirname $BACKEND_PATH)
+PROJECT_PATH=$(dirname $BIN_PATH)
+FRONTEND_REACT_PATH="$PROJECT_PATH/frontend"
+
+docker build \
+-f "$FRONTEND_REACT_PATH/Dockerfile" \
+-t frontend-react \
+"$FRONTEND_REACT_PATH/."
