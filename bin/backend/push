@@ -1,0 +1,6 @@
+#! /usr/bin/bash
+ECR_BACKEND_NODE_URL="$AWS_ACCOUNT.dkr.ecr.$AWS_REGION.amazonaws.com/mern-deployment/backend-node"
+echo $ECR_BACKEND_NODE_URL
+
+docker tag backend-node:latest $ECR_BACKEND_NODE_URL:latest
+docker push $ECR_BACKEND_NODE_URL:latest

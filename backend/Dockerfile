@@ -5,6 +5,6 @@ WORKDIR /app
 COPY package.json package-lock.json ./ 
 RUN npm install
 COPY . . 
-RUN wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
+RUN [ -f global-bundle.pem ] || wget https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem
 
-ENTRYPOINT npm run start
+ENTRYPOINT ["npm", "run", "start"]
