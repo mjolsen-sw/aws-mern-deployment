@@ -6,7 +6,7 @@ import compression from "compression"
 import ensureInitialData from "./import"
 import apiRouter from "./api"
 
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:4173";
 
 const app = express();
 app.use(compression());

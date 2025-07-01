@@ -9,6 +9,7 @@ services:
       - FRONTEND_URL=http://localhost:4173
       - MONGODB_URI=mongodb://mongodb:27017/trivia
       - PORT=3000
+      - NODE_ENV=development
     depends_on:
       - mongodb
     networks:
